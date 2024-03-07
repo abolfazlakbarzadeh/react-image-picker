@@ -1,0 +1,9 @@
+#drag-drop {
+    &.drag-over {
+        border-color: aqua;
+    }
+
+    &.mouse-over {
+        border-color: brown;
+    }
+}
