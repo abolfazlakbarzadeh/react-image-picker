@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import classNames from "classnames";
 import "./drag-drop.scss";
+import { FileSelector } from "../file-selector";
 // import dragDropImage from "";
 const dragDropImage = new URL("../../../images/drag-drop.png", import.meta.url);
 
@@ -42,9 +43,9 @@ export const DragDrop = () => {
     });
   };
   const dragOverHandler = (event: DragEvent) => {
-    console.log("dragOverHandler", {
-      event,
-    });
+    // console.log("dragOverHandler", {
+    //   event,
+    // });
   };
   const dragLeaveHandler = (event: DragEvent) => {
     console.log("dragLeaveHandler", {
@@ -57,9 +58,8 @@ export const DragDrop = () => {
     });
   };
   const dropHandler = (event: DragEvent) => {
-    console.log("dropHandler", {
-      event,
-    });
+    const dt = event.dataTransfer;
+    const files = dt?.files;
   };
 
   function handleZoneEvents(
@@ -122,15 +122,7 @@ export const DragDrop = () => {
       )}
     >
       <div className="shield pointer-events-none">
-        <form className="opacity-0">
-          <input
-            type="file"
-            multiple
-            accept="image/*"
-            className="absolute inset-0"
-            onChange={handleFiles}
-          />
-        </form>
+        <FileSelector onChange={handleFiles} multiple />
         <div className="flex flex-col gap-4 items-center  pointer-events-none">
           <img
             src={dragDropImage.href}

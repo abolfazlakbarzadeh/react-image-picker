@@ -20,6 +20,37 @@ $parcel$export(module.exports, "ImagePicker", () => $f8622788abb4b096$export$2e2
 
 
 
+
+
+const $570ac3403482c4dc$export$b3f7d4725397d87e = (props)=>{
+    const handleFiles = (event)=>{
+        console.log("handleFiles", {
+            files: event.target.files
+        });
+    };
+    return /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
+        className: "w-full h-full relative",
+        children: /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("input", {
+            type: "file",
+            multiple: true,
+            accept: "image/*",
+            className: "absolute inset-0",
+            onChange: handleFiles
+        }, void 0, false, {
+            fileName: "src/image-picker/components/file-selector/file-selector.tsx",
+            lineNumber: 12,
+            columnNumber: 7
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/image-picker/components/file-selector/file-selector.tsx",
+        lineNumber: 11,
+        columnNumber: 5
+    }, undefined);
+};
+
+
+
+
 // import dragDropImage from "";
 const $839c8cc5f1d64e5c$var$dragDropImage = new URL("drag-drop.c2dd78b3.png", "file:" + __filename);
 const $839c8cc5f1d64e5c$export$b4a441ca74fcf9d2 = ()=>{
@@ -49,9 +80,9 @@ const $839c8cc5f1d64e5c$export$b4a441ca74fcf9d2 = ()=>{
         });
     };
     const dragOverHandler = (event)=>{
-        console.log("dragOverHandler", {
-            event: event
-        });
+    // console.log("dragOverHandler", {
+    //   event,
+    // });
     };
     const dragLeaveHandler = (event)=>{
         console.log("dragLeaveHandler", {
@@ -64,9 +95,8 @@ const $839c8cc5f1d64e5c$export$b4a441ca74fcf9d2 = ()=>{
         });
     };
     const dropHandler = (event)=>{
-        console.log("dropHandler", {
-            event: event
-        });
+        const dt = event.dataTransfer;
+        const files = dt?.files;
     };
     function handleZoneEvents(action) {
         const preventFunc = (handler)=>{
@@ -118,19 +148,9 @@ const $839c8cc5f1d64e5c$export$b4a441ca74fcf9d2 = ()=>{
         children: /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
             className: "shield pointer-events-none",
             children: [
-                /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("form", {
-                    className: "opacity-0",
-                    children: /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("input", {
-                        type: "file",
-                        multiple: true,
-                        accept: "image/*",
-                        className: "absolute inset-0",
-                        onChange: handleFiles
-                    }, void 0, false, {
-                        fileName: "src/image-picker/components/drag-drop/drag-drop.tsx",
-                        lineNumber: 126,
-                        columnNumber: 11
-                    }, undefined)
+                /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)((0, $570ac3403482c4dc$export$b3f7d4725397d87e), {
+                    onChange: handleFiles,
+                    multiple: true
                 }, void 0, false, {
                     fileName: "src/image-picker/components/drag-drop/drag-drop.tsx",
                     lineNumber: 125,
@@ -145,7 +165,7 @@ const $839c8cc5f1d64e5c$export$b4a441ca74fcf9d2 = ()=>{
                             alt: ""
                         }, void 0, false, {
                             fileName: "src/image-picker/components/drag-drop/drag-drop.tsx",
-                            lineNumber: 135,
+                            lineNumber: 127,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
@@ -153,13 +173,13 @@ const $839c8cc5f1d64e5c$export$b4a441ca74fcf9d2 = ()=>{
                             children: "\u0628\u0631\u0627\u06CC \u0627\u0646\u062A\u062E\u0627\u0628 \u0639\u06A9\u0633 \u06A9\u0644\u06CC\u06A9 \u06A9\u0646\u06CC\u062F \u06CC\u0627 \u0639\u06A9\u0633 \u0647\u0627 \u0631\u0627 \u0628\u0647 \u0627\u06CC\u0646\u062C\u0627 \u0628\u06A9\u0634\u06CC\u062F"
                         }, void 0, false, {
                             fileName: "src/image-picker/components/drag-drop/drag-drop.tsx",
-                            lineNumber: 140,
+                            lineNumber: 132,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/image-picker/components/drag-drop/drag-drop.tsx",
-                    lineNumber: 134,
+                    lineNumber: 126,
                     columnNumber: 9
                 }, undefined)
             ]
