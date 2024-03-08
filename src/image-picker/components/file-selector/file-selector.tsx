@@ -1,14 +1,18 @@
-import React from "react";
+import React, { FC, HTMLProps } from "react";
+import classNames from "classnames";
+import { twMerge } from "tailwind-merge";
 import { IFileSelector } from "./types";
 
 export const FileSelector: IFileSelector = (props) => {
   const handleFiles = (event: any) => {
-    console.log("handleFiles", {
-      files: event.target.files,
-    });
+    props.onChange(event.target.files);
   };
   return (
-    <div className="w-full h-full relative">
+    <div
+      className={twMerge(
+        classNames("w-full h-full relative opacity-0", props.className)
+      )}
+    >
       <input
         type="file"
         multiple

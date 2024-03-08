@@ -6,10 +6,11 @@ import { useRef } from "react";
 import classNames from "classnames";
 import "./drag-drop.scss";
 import { FileSelector } from "../file-selector";
+import { IDragDrop } from "./types";
 // import dragDropImage from "";
 const dragDropImage = new URL("../../../images/drag-drop.png", import.meta.url);
 
-export const DragDrop = () => {
+export const DragDrop: IDragDrop = (props) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const removeShield = () => {
@@ -60,6 +61,7 @@ export const DragDrop = () => {
   const dropHandler = (event: DragEvent) => {
     const dt = event.dataTransfer;
     const files = dt?.files;
+    props.onDrop(props.multiple ? files : [files?.[0]]);
   };
 
   function handleZoneEvents(
@@ -107,10 +109,8 @@ export const DragDrop = () => {
     };
   }, []);
 
-  const handleFiles = (files: any) => {
-    console.log("handleFiles", {
-      files,
-    });
+  const handleFiles = (files: FileList) => {
+    props.onDrop(files);
   };
 
   return (
@@ -122,7 +122,11 @@ export const DragDrop = () => {
       )}
     >
       <div className="shield pointer-events-none">
-        <FileSelector onChange={handleFiles} multiple />
+        <FileSelector
+          multiple
+          onChange={handleFiles}
+          className="absolute inset-0"
+        />
         <div className="flex flex-col gap-4 items-center  pointer-events-none">
           <img
             src={dragDropImage.href}

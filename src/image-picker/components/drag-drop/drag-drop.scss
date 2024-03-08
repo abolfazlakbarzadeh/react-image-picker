@@ -1,9 +1,11 @@
 #drag-drop {
+    transition: border .3s;
+
     &.drag-over {
-        border-color: aqua;
+        border-color: brown;
     }
 
     &.mouse-over {
-        border-color: brown;
+        border-color: theme("colors.typography");
     }
 }

@@ -2,7 +2,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "declaration": true,
-    "target": "es5",
+    "target": "es6",
+    "types": [],
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -14,17 +15,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
-    "baseUrl": "./src",
-    "paths": {
-      "@/*": ["./*"]
-    }
+    "jsx": "react-jsx"
   },
   "include": ["src"],
-  "exclude": [
-    "src/**/*.spec.tsx",
-    "src/setupTests.tsx",
-    "src/stories",
-    "src/*.ts"
-  ]
+  "exclude": ["src/**/*.spec.tsx", "src/setupTests.tsx", "src/stories"]
 }
