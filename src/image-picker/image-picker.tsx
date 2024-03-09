@@ -15,12 +15,16 @@ import { getFileID } from "../utils";
 import { Uploader, cancelUpload } from "./upload";
 import { AxiosRequestConfig } from "axios";
 import { Provider, ProviderContext } from "../provider/provider";
+import { PreviewModal } from "./components/preview-modal";
+import { IPreviewModalProps } from "./components/preview-modal/types";
 
 const ImagePicker: FC = () => {
   const configs = useContext(ProviderContext);
   const [uploadingFiles, setUploadingFiles] = useState<Record<string, number>>(
     {}
   );
+  const [previewModal, setPreviewModal] =
+    useState<Pick<IPreviewModalProps, "name" | "url">>();
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const selectedSum = useMemo(
     () => configs.files.length + ~~configs.images?.length!,
@@ -93,6 +97,7 @@ const ImagePicker: FC = () => {
         failUpload={isFailUpload(getFileID(file))}
         onRemove={handleRemove}
         uploadProgress={uploadingFiles[getFileID(file)]}
+        onShowInModal={(url) => setPreviewModal(url)}
       />
     ));
     const imageItems =
@@ -102,6 +107,7 @@ const ImagePicker: FC = () => {
           large={!configs.multiple && !configs.limit}
           image={image}
           onRemove={handleRemove}
+          onShowInModal={(url) => setPreviewModal(url)}
         />
       )) || [];
 
@@ -120,6 +126,11 @@ const ImagePicker: FC = () => {
     <div className="flex flex-col gap-5">
       {uploadInterface}
       {configs.showPreview && previewSection}
+      <PreviewModal
+        open={!!previewModal}
+        {...previewModal!}
+        onClose={() => setPreviewModal(undefined)}
+      />
     </div>
   );
 };

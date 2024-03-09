@@ -205,41 +205,6 @@ const $55b0fa228d3114c9$export$b4a441ca74fcf9d2 = (props)=>{
 
 
 
-function $9d09422361664eea$export$21c1139956c4884f(props) {
-    return /*#__PURE__*/ (0, $hgUW1$jsxDEV)("svg", {
-        xmlns: "http://www.w3.org/2000/svg",
-        width: "1em",
-        height: "1em",
-        viewBox: "0 0 32 32",
-        ...props,
-        children: [
-            /*#__PURE__*/ (0, $hgUW1$jsxDEV)("path", {
-                fill: "currentColor",
-                d: "M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2m0 26C9.4 28 4 22.6 4 16S9.4 4 16 4s12 5.4 12 12s-5.4 12-12 12"
-            }, void 0, false, {
-                fileName: "src/icons/carbon-close-outline.tsx",
-                lineNumber: 13,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, $hgUW1$jsxDEV)("path", {
-                fill: "currentColor",
-                d: "M21.4 23L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4z"
-            }, void 0, false, {
-                fileName: "src/icons/carbon-close-outline.tsx",
-                lineNumber: 17,
-                columnNumber: 7
-            }, this)
-        ]
-    }, void 0, true, {
-        fileName: "src/icons/carbon-close-outline.tsx",
-        lineNumber: 6,
-        columnNumber: 5
-    }, this);
-}
-
-
-
-
 
 function $6e44d92c120e3aec$export$914e0b886a5281f8(props) {
     return /*#__PURE__*/ (0, $hgUW1$jsxDEV)("svg", {
@@ -328,7 +293,9 @@ const $3508605efb37992a$export$133773870222880f = (props)=>{
     (0, $hgUW1$useEffect)(()=>{
         if (props.file) loadImage();
     }, []);
-    const handleRemove = ()=>{
+    const handleRemove = (e)=>{
+        e.preventDefault();
+        e.stopPropagation();
         const payload = {
             isFile: isFile
         };
@@ -337,17 +304,24 @@ const $3508605efb37992a$export$133773870222880f = (props)=>{
         props.onRemove(payload);
     };
     const name = (0, $hgUW1$useMemo)(()=>isFile ? props.file?.name : props.image?.name || "image", []);
+    const handleImageModal = ()=>{
+        props.onShowInModal({
+            url: imageUrl,
+            name: name
+        });
+    };
     const layout = (0, $hgUW1$useMemo)(()=>{
         if (props.large) return /*#__PURE__*/ (0, $hgUW1$jsxDEV)((0, $hgUW1$Fragment), {
             children: /*#__PURE__*/ (0, $hgUW1$jsxDEV)("div", {
                 className: "items-center relative w-full",
+                onClick: handleImageModal,
                 children: [
                     /*#__PURE__*/ (0, $hgUW1$jsxDEV)("img", {
                         className: "h-[10rem] w-full grow-0 object-cover",
                         src: imageUrl
                     }, void 0, false, {
                         fileName: "src/image-picker/components/preview/preview.tsx",
-                        lineNumber: 51,
+                        lineNumber: 60,
                         columnNumber: 13
                     }, undefined),
                     /*#__PURE__*/ (0, $hgUW1$jsxDEV)("div", {
@@ -360,12 +334,12 @@ const $3508605efb37992a$export$133773870222880f = (props)=>{
                                     percentClassName: "text-white"
                                 }, void 0, false, {
                                     fileName: "src/image-picker/components/preview/preview.tsx",
-                                    lineNumber: 58,
+                                    lineNumber: 67,
                                     columnNumber: 19
                                 }, undefined)
                             }, void 0, false, {
                                 fileName: "src/image-picker/components/preview/preview.tsx",
-                                lineNumber: 56,
+                                lineNumber: 65,
                                 columnNumber: 15
                             }, undefined),
                             /*#__PURE__*/ (0, $hgUW1$jsxDEV)("div", {
@@ -376,34 +350,34 @@ const $3508605efb37992a$export$133773870222880f = (props)=>{
                                         children: name
                                     }, void 0, false, {
                                         fileName: "src/image-picker/components/preview/preview.tsx",
-                                        lineNumber: 66,
+                                        lineNumber: 75,
                                         columnNumber: 17
                                     }, undefined),
                                     /*#__PURE__*/ (0, $hgUW1$jsxDEV)((0, $6e44d92c120e3aec$export$914e0b886a5281f8), {
-                                        className: "shrink-0 cursor-pointer hover:scale-[1.1] transition-transform duration-100   grow-0 m-1",
+                                        className: "shrink-0 cursor-pointer hover:scale-[1.1] transition-transform duration-100   grow-0 m-1 active:scale-[.95]",
                                         fontSize: 20,
                                         onClick: handleRemove
                                     }, void 0, false, {
                                         fileName: "src/image-picker/components/preview/preview.tsx",
-                                        lineNumber: 68,
+                                        lineNumber: 77,
                                         columnNumber: 17
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/image-picker/components/preview/preview.tsx",
-                                lineNumber: 65,
+                                lineNumber: 74,
                                 columnNumber: 15
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/image-picker/components/preview/preview.tsx",
-                        lineNumber: 55,
+                        lineNumber: 64,
                         columnNumber: 13
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/image-picker/components/preview/preview.tsx",
-                lineNumber: 50,
+                lineNumber: 56,
                 columnNumber: 11
             }, undefined)
         }, void 0, false);
@@ -411,13 +385,14 @@ const $3508605efb37992a$export$133773870222880f = (props)=>{
             children: [
                 /*#__PURE__*/ (0, $hgUW1$jsxDEV)("div", {
                     className: "flex items-center w-ful gap-2 justify-between p-2",
+                    onClick: handleImageModal,
                     children: [
                         /*#__PURE__*/ (0, $hgUW1$jsxDEV)("img", {
                             className: "w-[5rem] h-[5rem] !rounded-[.5rem] border p-2 grow-0",
                             src: imageUrl
                         }, void 0, false, {
                             fileName: "src/image-picker/components/preview/preview.tsx",
-                            lineNumber: 82,
+                            lineNumber: 94,
                             columnNumber: 13
                         }, undefined),
                         /*#__PURE__*/ (0, $hgUW1$jsxDEV)("div", {
@@ -425,40 +400,40 @@ const $3508605efb37992a$export$133773870222880f = (props)=>{
                             children: name
                         }, void 0, false, {
                             fileName: "src/image-picker/components/preview/preview.tsx",
-                            lineNumber: 86,
+                            lineNumber: 98,
                             columnNumber: 13
                         }, undefined),
-                        /*#__PURE__*/ (0, $hgUW1$jsxDEV)((0, $9d09422361664eea$export$21c1139956c4884f), {
-                            className: "shrink-0 cursor-pointer hover:scale-[1.1] transition-transform duration-100   grow-0 text-red-700 mr-2",
+                        /*#__PURE__*/ (0, $hgUW1$jsxDEV)((0, $6e44d92c120e3aec$export$914e0b886a5281f8), {
+                            className: "shrink-0 cursor-pointer hover:scale-[1.1] transition-transform duration-100   grow-0 text-red-700 mr-2 active:scale-[.95]",
                             fontSize: 24,
                             onClick: handleRemove
                         }, void 0, false, {
                             fileName: "src/image-picker/components/preview/preview.tsx",
-                            lineNumber: 88,
+                            lineNumber: 100,
                             columnNumber: 13
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/image-picker/components/preview/preview.tsx",
-                    lineNumber: 81,
+                    lineNumber: 90,
                     columnNumber: 11
                 }, undefined),
-                /*#__PURE__*/ (0, $hgUW1$jsxDEV)("div", {
+                props.isUploading && /*#__PURE__*/ (0, $hgUW1$jsxDEV)("div", {
                     className: "px-2 pb-2",
-                    children: props.isUploading && /*#__PURE__*/ (0, $hgUW1$jsxDEV)((0, $8a997f72e00b223f$export$c17561cb55d4db30), {
+                    children: /*#__PURE__*/ (0, $hgUW1$jsxDEV)((0, $8a997f72e00b223f$export$c17561cb55d4db30), {
                         percent: props.uploadProgress,
                         progressClassName: "bg-cyan-500",
                         progressWrapperClassName: "bg-cyan-50",
                         showPercent: true
                     }, void 0, false, {
                         fileName: "src/image-picker/components/preview/preview.tsx",
-                        lineNumber: 96,
+                        lineNumber: 108,
                         columnNumber: 15
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/image-picker/components/preview/preview.tsx",
-                    lineNumber: 94,
-                    columnNumber: 11
+                    lineNumber: 107,
+                    columnNumber: 13
                 }, undefined)
             ]
         }, void 0, true);
@@ -478,12 +453,12 @@ const $3508605efb37992a$export$133773870222880f = (props)=>{
             children: layout
         }, void 0, false, {
             fileName: "src/image-picker/components/preview/preview.tsx",
-            lineNumber: 124,
+            lineNumber: 136,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/image-picker/components/preview/preview.tsx",
-        lineNumber: 116,
+        lineNumber: 128,
         columnNumber: 5
     }, undefined);
 };
@@ -586,9 +561,138 @@ const $6661cbb223503df2$export$b4ba47569ccac746 = (props)=>{
 
 
 
+
+
+
+
+
+
+function $9d09422361664eea$export$21c1139956c4884f(props) {
+    return /*#__PURE__*/ (0, $hgUW1$jsxDEV)("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        width: "1em",
+        height: "1em",
+        viewBox: "0 0 32 32",
+        ...props,
+        children: [
+            /*#__PURE__*/ (0, $hgUW1$jsxDEV)("path", {
+                fill: "currentColor",
+                d: "M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2m0 26C9.4 28 4 22.6 4 16S9.4 4 16 4s12 5.4 12 12s-5.4 12-12 12"
+            }, void 0, false, {
+                fileName: "src/icons/carbon-close-outline.tsx",
+                lineNumber: 13,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, $hgUW1$jsxDEV)("path", {
+                fill: "currentColor",
+                d: "M21.4 23L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4z"
+            }, void 0, false, {
+                fileName: "src/icons/carbon-close-outline.tsx",
+                lineNumber: 17,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/icons/carbon-close-outline.tsx",
+        lineNumber: 6,
+        columnNumber: 5
+    }, this);
+}
+
+
+const $8533bf7f7367ed21$export$183013bc7f2f4b5e = (props)=>{
+    const [loaded, setLoaded] = (0, $hgUW1$useState)(false);
+    const onLoadHandler = ()=>{
+        setLoaded(true);
+    };
+    (0, $hgUW1$useEffect)(()=>{
+        setLoaded(props.open);
+    }, [
+        props.open
+    ]);
+    return /*#__PURE__*/ (0, $hgUW1$jsxDEV)("div", {
+        className: (0, $hgUW1$twMerge)((0, $hgUW1$classnames)("absolute inset-0", {
+            "pointer-events-none": !props.open && !loaded
+        })),
+        children: [
+            /*#__PURE__*/ (0, $hgUW1$jsxDEV)("span", {
+                className: (0, $hgUW1$twMerge)((0, $hgUW1$classnames)("absolute inset-0 bg-black/[.2] transition-opacity duration-[.3s] z-0", {
+                    "opacity-0": !props.open
+                })),
+                onClick: props.onClose
+            }, void 0, false, {
+                fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
+                lineNumber: 23,
+                columnNumber: 7
+            }, undefined),
+            props.open && /*#__PURE__*/ (0, $hgUW1$jsxDEV)("div", {
+                className: (0, $hgUW1$twMerge)((0, $hgUW1$classnames)("max-w-[90%] max-h-[90%] absolute translate-x-[-50%] translate-y-[-50%] left-[50%] top-[50%] p-2 rounded-[.5rem] border bg-white z-10 flex flex-col gap-2 transition-opacity duration-[.3s]", {
+                    "opacity-0": !loaded
+                })),
+                children: [
+                    /*#__PURE__*/ (0, $hgUW1$jsxDEV)("div", {
+                        className: "flex items-center justify-between",
+                        children: [
+                            /*#__PURE__*/ (0, $hgUW1$jsxDEV)((0, $9d09422361664eea$export$21c1139956c4884f), {
+                                fontSize: 20,
+                                className: "text-typography"
+                            }, void 0, false, {
+                                fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
+                                lineNumber: 46,
+                                columnNumber: 13
+                            }, undefined),
+                            /*#__PURE__*/ (0, $hgUW1$jsxDEV)("div", {
+                                className: "text-typography text-[.8rem]",
+                                children: "\u0645\u0634\u0627\u0647\u062F\u0647 \u062A\u0635\u0648\u06CC\u0631"
+                            }, void 0, false, {
+                                fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
+                                lineNumber: 47,
+                                columnNumber: 13
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
+                        lineNumber: 45,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, $hgUW1$jsxDEV)("img", {
+                        src: props.url,
+                        className: "w-full h-full rounded-[1rem]",
+                        onLoad: onLoadHandler
+                    }, void 0, false, {
+                        fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
+                        lineNumber: 49,
+                        columnNumber: 11
+                    }, undefined),
+                    !!props.name && /*#__PURE__*/ (0, $hgUW1$jsxDEV)("div", {
+                        className: "text-typography text-[.8rem] text-center",
+                        children: props.name
+                    }, void 0, false, {
+                        fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
+                        lineNumber: 55,
+                        columnNumber: 13
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
+                lineNumber: 35,
+                columnNumber: 9
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
+        lineNumber: 16,
+        columnNumber: 5
+    }, undefined);
+};
+
+
+
+
 const $9956d2773e85558f$var$ImagePicker = ()=>{
     const configs = (0, $hgUW1$useContext)((0, $190a8be343b4b13e$export$b1da5abff9d0406));
     const [uploadingFiles, setUploadingFiles] = (0, $hgUW1$useState)({});
+    const [previewModal, setPreviewModal] = (0, $hgUW1$useState)();
     const [uploadedFiles, setUploadedFiles] = (0, $hgUW1$useState)([]);
     const selectedSum = (0, $hgUW1$useMemo)(()=>configs.files.length + ~~configs.images?.length, [
         configs.files,
@@ -650,19 +754,21 @@ const $9956d2773e85558f$var$ImagePicker = ()=>{
                 isUploading: isUploading((0, $fab42eb3dee39b5b$export$a0781c1cbbc5fc36)(file)),
                 failUpload: isFailUpload((0, $fab42eb3dee39b5b$export$a0781c1cbbc5fc36)(file)),
                 onRemove: handleRemove,
-                uploadProgress: uploadingFiles[(0, $fab42eb3dee39b5b$export$a0781c1cbbc5fc36)(file)]
+                uploadProgress: uploadingFiles[(0, $fab42eb3dee39b5b$export$a0781c1cbbc5fc36)(file)],
+                onShowInModal: (url)=>setPreviewModal(url)
             }, (0, $fab42eb3dee39b5b$export$a0781c1cbbc5fc36)(file), false, {
                 fileName: "src/image-picker/image-picker.tsx",
-                lineNumber: 87,
+                lineNumber: 91,
                 columnNumber: 7
             }, undefined));
         const imageItems = configs.images?.map((image, idx)=>/*#__PURE__*/ (0, $hgUW1$jsxDEV)((0, $3508605efb37992a$export$133773870222880f), {
                 large: !configs.multiple && !configs.limit,
                 image: image,
-                onRemove: handleRemove
+                onRemove: handleRemove,
+                onShowInModal: (url)=>setPreviewModal(url)
             }, `image_${idx}`, false, {
                 fileName: "src/image-picker/image-picker.tsx",
-                lineNumber: 100,
+                lineNumber: 105,
                 columnNumber: 9
             }, undefined)) || [];
         const items = fileItems.concat(imageItems);
@@ -671,7 +777,7 @@ const $9956d2773e85558f$var$ImagePicker = ()=>{
             children: items
         }, void 0, false, {
             fileName: "src/image-picker/image-picker.tsx",
-            lineNumber: 110,
+            lineNumber: 116,
             columnNumber: 12
         }, undefined);
     }, [
@@ -685,7 +791,7 @@ const $9956d2773e85558f$var$ImagePicker = ()=>{
             onDrop: handleDropFiles
         }, selectedSum, false, {
             fileName: "src/image-picker/image-picker.tsx",
-            lineNumber: 115,
+            lineNumber: 121,
             columnNumber: 14
         }, undefined);
     }, [
@@ -696,11 +802,20 @@ const $9956d2773e85558f$var$ImagePicker = ()=>{
         className: "flex flex-col gap-5",
         children: [
             uploadInterface,
-            configs.showPreview && previewSection
+            configs.showPreview && previewSection,
+            /*#__PURE__*/ (0, $hgUW1$jsxDEV)((0, $8533bf7f7367ed21$export$183013bc7f2f4b5e), {
+                open: !!previewModal,
+                ...previewModal,
+                onClose: ()=>setPreviewModal(undefined)
+            }, void 0, false, {
+                fileName: "src/image-picker/image-picker.tsx",
+                lineNumber: 129,
+                columnNumber: 7
+            }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/image-picker/image-picker.tsx",
-        lineNumber: 120,
+        lineNumber: 126,
         columnNumber: 5
     }, undefined);
 };
@@ -708,12 +823,12 @@ const $9956d2773e85558f$var$WithProvider = (props)=>/*#__PURE__*/ (0, $hgUW1$jsx
         ...props,
         children: /*#__PURE__*/ (0, $hgUW1$jsxDEV)($9956d2773e85558f$var$ImagePicker, {}, void 0, false, {
             fileName: "src/image-picker/image-picker.tsx",
-            lineNumber: 129,
+            lineNumber: 140,
             columnNumber: 5
         }, undefined)
     }, void 0, false, {
         fileName: "src/image-picker/image-picker.tsx",
-        lineNumber: 128,
+        lineNumber: 139,
         columnNumber: 3
     }, undefined);
 var $9956d2773e85558f$export$2e2bcd8739ae039 = $9956d2773e85558f$var$WithProvider;

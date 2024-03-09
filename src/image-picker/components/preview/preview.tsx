@@ -30,7 +30,9 @@ export const Preview: IPreview = (props) => {
     if (props.file) loadImage();
   }, []);
 
-  const handleRemove = () => {
+  const handleRemove = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
     const payload: OnRemoveProps = {
       isFile,
     };
@@ -43,11 +45,18 @@ export const Preview: IPreview = (props) => {
     []
   );
 
+  const handleImageModal = () => {
+    props.onShowInModal({ url: imageUrl!, name });
+  };
+
   const layout = useMemo(() => {
     if (props.large) {
       return (
         <>
-          <div className="items-center relative w-full">
+          <div
+            className="items-center relative w-full"
+            onClick={handleImageModal}
+          >
             <img
               className="h-[10rem] w-full grow-0 object-cover"
               src={imageUrl}
@@ -66,7 +75,7 @@ export const Preview: IPreview = (props) => {
                 <div className="text-[.9rem] w-full grow">{name}</div>
 
                 <MdiTrash
-                  className="shrink-0 cursor-pointer hover:scale-[1.1] transition-transform duration-100   grow-0 m-1"
+                  className="shrink-0 cursor-pointer hover:scale-[1.1] transition-transform duration-100   grow-0 m-1 active:scale-[.95]"
                   fontSize={20}
                   onClick={handleRemove}
                 />
@@ -78,29 +87,32 @@ export const Preview: IPreview = (props) => {
     } else {
       return (
         <>
-          <div className="flex items-center w-ful gap-2 justify-between p-2">
+          <div
+            className="flex items-center w-ful gap-2 justify-between p-2"
+            onClick={handleImageModal}
+          >
             <img
               className="w-[5rem] h-[5rem] !rounded-[.5rem] border p-2 grow-0"
               src={imageUrl}
             />
             <div className="text-[.8rem] w-full grow">{name}</div>
 
-            <CarbonCloseOutline
-              className="shrink-0 cursor-pointer hover:scale-[1.1] transition-transform duration-100   grow-0 text-red-700 mr-2"
+            <MdiTrash
+              className="shrink-0 cursor-pointer hover:scale-[1.1] transition-transform duration-100   grow-0 text-red-700 mr-2 active:scale-[.95]"
               fontSize={24}
               onClick={handleRemove}
             />
           </div>
-          <div className="px-2 pb-2">
-            {props.isUploading && (
+          {props.isUploading && (
+            <div className="px-2 pb-2">
               <ProgressBar
                 percent={props.uploadProgress!}
                 progressClassName="bg-cyan-500"
                 progressWrapperClassName="bg-cyan-50"
                 showPercent
               />
-            )}
-          </div>
+            </div>
+          )}
         </>
       );
     }
