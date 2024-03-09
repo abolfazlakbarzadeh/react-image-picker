@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ChangeEventHandler } from "react";
 import { useCallback } from "react";
 import { useEffect } from "react";
@@ -7,10 +7,13 @@ import classNames from "classnames";
 import "./drag-drop.scss";
 import { FileSelector } from "../file-selector";
 import { IDragDrop } from "./types";
+import { ProviderContext } from "../../../provider/provider";
+import { removeDuplicateFiles } from "../../../utils";
 // import dragDropImage from "";
 const dragDropImage = new URL("../../../images/drag-drop.png", import.meta.url);
 
 export const DragDrop: IDragDrop = (props) => {
+  const configs = useContext(ProviderContext);
   const ref = useRef<HTMLDivElement>(null);
 
   const removeShield = () => {
@@ -38,30 +41,29 @@ export const DragDrop: IDragDrop = (props) => {
         ref.current?.classList.remove(className);
       }
     };
-  const dragEnterHandler = (event: DragEvent) => {
-    console.log("dragEnterHandler", {
-      event,
-    });
-  };
+  const dragEnterHandler = (event: DragEvent) => {};
   const dragOverHandler = (event: DragEvent) => {
     // console.log("dragOverHandler", {
     //   event,
     // });
   };
-  const dragLeaveHandler = (event: DragEvent) => {
-    console.log("dragLeaveHandler", {
-      event,
-    });
-  };
-  const dragStartHandler = (event: DragEvent) => {
-    console.log("dragStartHandler", {
-      event,
-    });
-  };
-  const dropHandler = (event: DragEvent) => {
-    const dt = event.dataTransfer;
-    const files = dt?.files;
-    props.onDrop(props.multiple ? files : [files?.[0]]);
+  const dragLeaveHandler = (event: DragEvent) => {};
+  const dragStartHandler = (event: DragEvent) => {};
+  const dropHandler = (droppedFiles?: FileList) => {
+    const files = removeDuplicateFiles(
+      configs.files,
+      Array.from(droppedFiles || [])
+    );
+    if (!configs.multiple && typeof configs.limit == "undefined")
+      props.onDrop([files?.[0]]);
+    else if (configs.multiple) props.onDrop(files);
+    else if (typeof configs.limit == "number")
+      props.onDrop(
+        files.slice(
+          0,
+          configs.limit - (configs.files.length + ~~configs.images?.length!)
+        )
+      );
   };
 
   function handleZoneEvents(
@@ -85,7 +87,9 @@ export const DragDrop: IDragDrop = (props) => {
         dragover: dragOverHandler,
         dragleave: dragLeaveHandler,
         dragstart: dragStartHandler,
-        drop: dropHandler,
+        drop: (event: DragEvent) => {
+          dropHandler(event.dataTransfer?.files);
+        },
       });
       setEvent({
         dragenter: hightlightZone(),
@@ -109,8 +113,8 @@ export const DragDrop: IDragDrop = (props) => {
     };
   }, []);
 
-  const handleFiles = (files: FileList) => {
-    props.onDrop(files);
+  const handleFiles = (files: any) => {
+    dropHandler(files);
   };
 
   return (
@@ -123,7 +127,7 @@ export const DragDrop: IDragDrop = (props) => {
     >
       <div className="shield pointer-events-none">
         <FileSelector
-          multiple
+          multiple={configs.multiple}
           onChange={handleFiles}
           className="absolute inset-0"
         />
@@ -133,7 +137,7 @@ export const DragDrop: IDragDrop = (props) => {
             className="w-[5rem] h-[5rem] opacity-50 z-0"
             alt=""
           />
-          <div className="text-[1rem] text-center opacity-50 max-w-[20rem]">
+          <div className="text-[1rem] text-center opacity-50 max-w-[17rem]">
             برای انتخاب عکس کلیک کنید یا عکس ها را به اینجا بکشید
           </div>
         </div>
