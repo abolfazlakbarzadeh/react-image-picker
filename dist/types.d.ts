@@ -14,11 +14,13 @@ type IImagePickerImage = {
 };
 interface IImagePickerProps {
     dragabble?: boolean;
+    rtl?: boolean;
     uploadOnSelect?: boolean;
     multiple?: boolean;
     showPreview?: boolean;
     uploadAction?: string;
     limit?: number;
+    locale?: string | Locale;
     uploadAxiosOptions?: AxiosRequestConfig<FormData>;
     uploadHandler?: IUploadHandler;
     files: File[];
@@ -28,5 +30,10 @@ interface IImagePickerProps {
     onRemoveImage?: (props: IImagePickerImage) => void;
 }
 type IImagePicker = FC<IImagePickerProps>;
+type Locale = Partial<{
+    drag_drop_hint: string;
+    select_image: string;
+    preview_image_modal_title: string;
+}>;
 
 //# sourceMappingURL=types.d.ts.map

@@ -291,6 +291,10 @@ img, video {
   display: flex;
 }
 
+.h-4 {
+  height: 1rem;
+}
+
 .h-\[10rem\] {
   height: 10rem;
 }
@@ -508,6 +512,10 @@ img, video {
 .text-typography {
   --tw-text-opacity: 1;
   color: rgb(69 66 73 / var(--tw-text-opacity));
+}
+
+.text-typography\/\[\.5\] {
+  color: #45424980;
 }
 
 .text-white {

@@ -41,14 +41,6 @@ export const DragDrop: IDragDrop = (props) => {
         ref.current?.classList.remove(className);
       }
     };
-  const dragEnterHandler = (event: DragEvent) => {};
-  const dragOverHandler = (event: DragEvent) => {
-    // console.log("dragOverHandler", {
-    //   event,
-    // });
-  };
-  const dragLeaveHandler = (event: DragEvent) => {};
-  const dragStartHandler = (event: DragEvent) => {};
   const dropHandler = (droppedFiles?: FileList) => {
     const files = removeDuplicateFiles(
       configs.files,
@@ -83,10 +75,6 @@ export const DragDrop: IDragDrop = (props) => {
     };
     if (ref.current) {
       setEvent({
-        dragenter: dragEnterHandler,
-        dragover: dragOverHandler,
-        dragleave: dragLeaveHandler,
-        dragstart: dragStartHandler,
         drop: (event: DragEvent) => {
           dropHandler(event.dataTransfer?.files);
         },
@@ -138,7 +126,7 @@ export const DragDrop: IDragDrop = (props) => {
             alt=""
           />
           <div className="text-[1rem] text-center opacity-50 max-w-[17rem]">
-            برای انتخاب عکس کلیک کنید یا عکس ها را به اینجا بکشید
+            {configs.locale.drag_drop_hint}
           </div>
         </div>
       </div>

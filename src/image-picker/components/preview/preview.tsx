@@ -72,7 +72,9 @@ export const Preview: IPreview = (props) => {
                 )}
               </div>
               <div className="flex items-center text-white">
-                <div className="text-[.9rem] w-full grow">{name}</div>
+                <div className="text-[.9rem] w-full grow relative">
+                  <div className="absolute inset-0">{name}</div>
+                </div>
 
                 <MdiTrash
                   className="shrink-0 cursor-pointer hover:scale-[1.1] transition-transform duration-100   grow-0 m-1 active:scale-[.95]"
@@ -95,7 +97,11 @@ export const Preview: IPreview = (props) => {
               className="w-[5rem] h-[5rem] !rounded-[.5rem] border p-2 grow-0"
               src={imageUrl}
             />
-            <div className="text-[.8rem] w-full grow">{name}</div>
+            <div className="text-[.9rem] w-full h-4 grow relative overflow-hidden">
+              <div className="absolute inset-0" title={name}>
+                {name}
+              </div>
+            </div>
 
             <MdiTrash
               className="shrink-0 cursor-pointer hover:scale-[1.1] transition-transform duration-100   grow-0 text-red-700 mr-2 active:scale-[.95]"

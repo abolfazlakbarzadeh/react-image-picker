@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IPreviewModal } from "./types";
 import { twMerge } from "tailwind-merge";
 import classNames from "classnames";
 import { CarbonCloseOutline } from "../../../icons/carbon-close-outline";
+import { ProviderContext } from "../../../provider/provider";
 
 export const PreviewModal: IPreviewModal = (props) => {
+  const configs = useContext(ProviderContext);
   const [loaded, setLoaded] = useState(false);
   const onLoadHandler = () => {
     setLoaded(true);
@@ -43,8 +45,14 @@ export const PreviewModal: IPreviewModal = (props) => {
           )}
         >
           <div className="flex items-center justify-between">
-            <CarbonCloseOutline fontSize={20} className="text-typography" />
-            <div className="text-typography text-[.8rem]">مشاهده تصویر</div>
+            <CarbonCloseOutline
+              fontSize={20}
+              className="text-typography"
+              onClick={props.onClose}
+            />
+            <div className="text-typography text-[.8rem]">
+              {configs.locale.preview_image_modal_title}
+            </div>
           </div>
           <img
             src={props.url}

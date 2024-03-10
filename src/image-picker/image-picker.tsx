@@ -11,12 +11,13 @@ import React, {
 import { DragDrop } from "./components/drag-drop/drag-drop";
 import { Preview } from "./components/preview";
 import { OnRemoveProps } from "./components/preview/types";
-import { getFileID } from "../utils";
+import { getFileID, getLimitationReached, getSelectedSum } from "../utils";
 import { Uploader, cancelUpload } from "./upload";
 import { AxiosRequestConfig } from "axios";
 import { Provider, ProviderContext } from "../provider/provider";
 import { PreviewModal } from "./components/preview-modal";
 import { IPreviewModalProps } from "./components/preview-modal/types";
+import { FileSelector } from "./components/file-selector";
 
 const ImagePicker: FC = () => {
   const configs = useContext(ProviderContext);
@@ -26,21 +27,18 @@ const ImagePicker: FC = () => {
   const [previewModal, setPreviewModal] =
     useState<Pick<IPreviewModalProps, "name" | "url">>();
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
-  const selectedSum = useMemo(
-    () => configs.files.length + ~~configs.images?.length!,
-    [configs.files, configs.images]
-  );
+
   useEffect(() => {
     configs.onChange?.(configs.files);
   }, [configs.files, configs.onChange]);
-
-  const isLimitReached =
-    ((!!configs.files.length || !!configs.images?.length) &&
-      !configs.multiple &&
-      typeof configs.limit == "undefined") ||
-    (typeof configs.limit == "number" &&
-      (configs.files.length >= configs.limit ||
-        (configs.images?.length || 0) >= configs.limit));
+  const selectedSum = useMemo(
+    () => getSelectedSum(configs),
+    [configs.files, configs.images]
+  );
+  const isLimitReached = useMemo(
+    () => getLimitationReached(configs),
+    [configs.files, configs.images, configs.multiple, configs.limit]
+  );
 
   const isUploading = useCallback(
     (fileID: string) => {
@@ -117,13 +115,21 @@ const ImagePicker: FC = () => {
   }, [configs.files, configs.images, uploadingFiles, uploadedFiles]);
 
   const uploadInterface = useMemo(() => {
-    if (!isLimitReached && configs.dragabble) {
-      return <DragDrop key={selectedSum} onDrop={handleDropFiles} />;
+    if (!isLimitReached) {
+      if (configs.dragabble) {
+        return <DragDrop key={selectedSum} onDrop={handleDropFiles} />;
+      } else
+        return <FileSelector key={selectedSum} onChange={handleDropFiles} />;
     }
-  }, [configs.files.length, configs.images?.length]);
+  }, [selectedSum, isLimitReached]);
 
   return (
-    <div className="flex flex-col gap-5">
+    <div
+      className="flex flex-col gap-5"
+      style={{
+        direction: configs.rtl ? "rtl" : "ltr",
+      }}
+    >
       {uploadInterface}
       {configs.showPreview && previewSection}
       <PreviewModal
@@ -162,11 +168,13 @@ export type IImagePickerImage = {
 
 export interface IImagePickerProps {
   dragabble?: boolean;
+  rtl?: boolean;
   uploadOnSelect?: boolean;
   multiple?: boolean;
   showPreview?: boolean;
   uploadAction?: string;
   limit?: number;
+  locale?: string | Locale;
   uploadAxiosOptions?: AxiosRequestConfig<FormData>;
   uploadHandler?: IUploadHandler;
   files: File[];
@@ -177,3 +185,8 @@ export interface IImagePickerProps {
 }
 
 declare type IImagePicker = FC<IImagePickerProps>;
+export type Locale = Partial<{
+  drag_drop_hint: string;
+  select_image: string;
+  preview_image_modal_title: string;
+}>;

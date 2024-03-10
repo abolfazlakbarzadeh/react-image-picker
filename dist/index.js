@@ -26,43 +26,40 @@ $parcel$export(module.exports, "ImagePicker", () => $f8622788abb4b096$export$2e2
 
 
 
-const $570ac3403482c4dc$export$b3f7d4725397d87e = (props)=>{
-    const handleFiles = (event)=>{
-        props.onChange(event.target.files);
-    };
-    return /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
-        className: (0, $8zHUo$tailwindmerge.twMerge)((0, ($parcel$interopDefault($8zHUo$classnames)))("w-full h-full relative opacity-0", props.className)),
-        children: /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("input", {
-            type: "file",
-            multiple: true,
-            accept: "image/*",
-            className: "absolute inset-0",
-            onChange: handleFiles
-        }, void 0, false, {
-            fileName: "src/image-picker/components/file-selector/file-selector.tsx",
-            lineNumber: 16,
-            columnNumber: 7
-        }, undefined)
-    }, void 0, false, {
-        fileName: "src/image-picker/components/file-selector/file-selector.tsx",
-        lineNumber: 11,
-        columnNumber: 5
-    }, undefined);
+
+
+const $293a6409a99d5e3b$export$84584c2a98eb6753 = {
+    drag_drop_hint: "To select image click here or Drag and Drop image over here.",
+    select_image: "Select image",
+    preview_image_modal_title: "Preview Image"
 };
 
 
+const $767d8810f44814da$export$48a262eaf0aadda2 = {
+    drag_drop_hint: "\u0628\u0631\u0627\u06CC \u0627\u0646\u062A\u062E\u0627\u0628 \u0639\u06A9\u0633 \u06A9\u0644\u06CC\u06A9 \u06A9\u0646\u06CC\u062F \u06CC\u0627 \u0639\u06A9\u0633 \u0631\u0627 \u0628\u0647 \u0627\u06CC\u0646\u062C\u0627 \u0628\u06A9\u0634\u06CC\u062F",
+    select_image: "\u0627\u0646\u062A\u062E\u0627\u0628 \u0639\u06A9\u0633",
+    preview_image_modal_title: "\u0645\u0634\u0627\u0647\u062F\u0647 \u062A\u0635\u0648\u06CC\u0631"
+};
 
 
 
 
 const $4867e356d9e401b7$export$b1da5abff9d0406 = /*#__PURE__*/ (0, $8zHUo$react.createContext)({});
 const $4867e356d9e401b7$export$2881499e37b75b9a = ({ children: children, ...props })=>{
+    const locales = {
+        en: $293a6409a99d5e3b$export$84584c2a98eb6753,
+        fa: $767d8810f44814da$export$48a262eaf0aadda2
+    };
     return /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)($4867e356d9e401b7$export$b1da5abff9d0406.Provider, {
-        value: props,
+        value: {
+            ...props,
+            locale: Object.assign({}, typeof props.locale == "string" ? locales[props.locale] || locales.en : locales.en, props.locale),
+            rtl: props.rtl || props.locale == "fa"
+        },
         children: children
     }, void 0, false, {
         fileName: "src/provider/provider.tsx",
-        lineNumber: 12,
+        lineNumber: 20,
         columnNumber: 5
     }, undefined);
 };
@@ -70,6 +67,63 @@ const $4867e356d9e401b7$export$2881499e37b75b9a = ({ children: children, ...prop
 
 const $9ba0f9a5c47c04f2$export$a0781c1cbbc5fc36 = (file)=>`${file.name}_${file.size}`;
 const $9ba0f9a5c47c04f2$export$37db6582fd067b92 = (files, newfiles)=>newfiles.filter((_file)=>!files.some((__file)=>$9ba0f9a5c47c04f2$export$a0781c1cbbc5fc36(_file) == $9ba0f9a5c47c04f2$export$a0781c1cbbc5fc36(__file)));
+const $9ba0f9a5c47c04f2$export$63b087218d043c45 = (configs)=>configs.files.length + ~~configs.images?.length;
+const $9ba0f9a5c47c04f2$export$34bc97de79737939 = (configs)=>(!!configs.files.length || !!configs.images?.length) && !configs.multiple && typeof configs.limit == "undefined" || typeof configs.limit == "number" && (configs.files.length >= configs.limit || (configs.images?.length || 0) >= configs.limit);
+
+
+const $570ac3403482c4dc$export$b3f7d4725397d87e = (props)=>{
+    const configs = (0, $8zHUo$react.useContext)((0, $4867e356d9e401b7$export$b1da5abff9d0406));
+    const selectedSum = (0, $8zHUo$react.useMemo)(()=>(0, $9ba0f9a5c47c04f2$export$63b087218d043c45)(configs), [
+        configs.files,
+        configs.images
+    ]);
+    const handleFiles = (event)=>{
+        props.onChange(event.target.files);
+    };
+    const counter = (0, $8zHUo$react.useMemo)(()=>{
+        if (selectedSum > 1) return `(${selectedSum})`;
+    }, [
+        selectedSum
+    ]);
+    return /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
+        className: (0, $8zHUo$tailwindmerge.twMerge)((0, ($parcel$interopDefault($8zHUo$classnames)))("w-full h-full relative p-6 border rounded-[1rem]", {
+            "opacity-0": configs.dragabble
+        }, props.className)),
+        children: [
+            /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("input", {
+                type: "file",
+                multiple: true,
+                accept: "image/*",
+                className: "absolute inset-0 opacity-0",
+                onChange: handleFiles
+            }, void 0, false, {
+                fileName: "src/image-picker/components/file-selector/file-selector.tsx",
+                lineNumber: 35,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
+                className: "text-typography/[.5] text-center pointer-events-none",
+                children: [
+                    configs.locale.select_image,
+                    " ",
+                    counter
+                ]
+            }, void 0, true, {
+                fileName: "src/image-picker/components/file-selector/file-selector.tsx",
+                lineNumber: 42,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/image-picker/components/file-selector/file-selector.tsx",
+        lineNumber: 24,
+        columnNumber: 5
+    }, undefined);
+};
+
+
+
+
 
 
 // import dragDropImage from "";
@@ -96,14 +150,6 @@ const $839c8cc5f1d64e5c$export$b4a441ca74fcf9d2 = (props)=>{
             if (highlight) ref.current?.classList.add(className);
             else ref.current?.classList.remove(className);
         };
-    const dragEnterHandler = (event)=>{};
-    const dragOverHandler = (event)=>{
-    // console.log("dragOverHandler", {
-    //   event,
-    // });
-    };
-    const dragLeaveHandler = (event)=>{};
-    const dragStartHandler = (event)=>{};
     const dropHandler = (droppedFiles)=>{
         const files = (0, $9ba0f9a5c47c04f2$export$37db6582fd067b92)(configs.files, Array.from(droppedFiles || []));
         if (!configs.multiple && typeof configs.limit == "undefined") props.onDrop([
@@ -125,10 +171,6 @@ const $839c8cc5f1d64e5c$export$b4a441ca74fcf9d2 = (props)=>{
         };
         if (ref.current) {
             setEvent({
-                dragenter: dragEnterHandler,
-                dragover: dragOverHandler,
-                dragleave: dragLeaveHandler,
-                dragstart: dragStartHandler,
                 drop: (event)=>{
                     dropHandler(event.dataTransfer?.files);
                 }
@@ -168,7 +210,7 @@ const $839c8cc5f1d64e5c$export$b4a441ca74fcf9d2 = (props)=>{
                     className: "absolute inset-0"
                 }, void 0, false, {
                     fileName: "src/image-picker/components/drag-drop/drag-drop.tsx",
-                    lineNumber: 129,
+                    lineNumber: 117,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
@@ -180,32 +222,32 @@ const $839c8cc5f1d64e5c$export$b4a441ca74fcf9d2 = (props)=>{
                             alt: ""
                         }, void 0, false, {
                             fileName: "src/image-picker/components/drag-drop/drag-drop.tsx",
-                            lineNumber: 135,
+                            lineNumber: 123,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
                             className: "text-[1rem] text-center opacity-50 max-w-[17rem]",
-                            children: "\u0628\u0631\u0627\u06CC \u0627\u0646\u062A\u062E\u0627\u0628 \u0639\u06A9\u0633 \u06A9\u0644\u06CC\u06A9 \u06A9\u0646\u06CC\u062F \u06CC\u0627 \u0639\u06A9\u0633 \u0647\u0627 \u0631\u0627 \u0628\u0647 \u0627\u06CC\u0646\u062C\u0627 \u0628\u06A9\u0634\u06CC\u062F"
+                            children: configs.locale.drag_drop_hint
                         }, void 0, false, {
                             fileName: "src/image-picker/components/drag-drop/drag-drop.tsx",
-                            lineNumber: 140,
+                            lineNumber: 128,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/image-picker/components/drag-drop/drag-drop.tsx",
-                    lineNumber: 134,
+                    lineNumber: 122,
                     columnNumber: 9
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/image-picker/components/drag-drop/drag-drop.tsx",
-            lineNumber: 128,
+            lineNumber: 116,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/image-picker/components/drag-drop/drag-drop.tsx",
-        lineNumber: 121,
+        lineNumber: 109,
         columnNumber: 5
     }, undefined);
 };
@@ -356,8 +398,15 @@ const $1712531664cb6699$export$133773870222880f = (props)=>{
                                 className: "flex items-center text-white",
                                 children: [
                                     /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
-                                        className: "text-[.9rem] w-full grow",
-                                        children: name
+                                        className: "text-[.9rem] w-full grow relative",
+                                        children: /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
+                                            className: "absolute inset-0",
+                                            children: name
+                                        }, void 0, false, {
+                                            fileName: "src/image-picker/components/preview/preview.tsx",
+                                            lineNumber: 76,
+                                            columnNumber: 19
+                                        }, undefined)
                                     }, void 0, false, {
                                         fileName: "src/image-picker/components/preview/preview.tsx",
                                         lineNumber: 75,
@@ -369,7 +418,7 @@ const $1712531664cb6699$export$133773870222880f = (props)=>{
                                         onClick: handleRemove
                                     }, void 0, false, {
                                         fileName: "src/image-picker/components/preview/preview.tsx",
-                                        lineNumber: 77,
+                                        lineNumber: 79,
                                         columnNumber: 17
                                     }, undefined)
                                 ]
@@ -402,15 +451,23 @@ const $1712531664cb6699$export$133773870222880f = (props)=>{
                             src: imageUrl
                         }, void 0, false, {
                             fileName: "src/image-picker/components/preview/preview.tsx",
-                            lineNumber: 94,
+                            lineNumber: 96,
                             columnNumber: 13
                         }, undefined),
                         /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
-                            className: "text-[.8rem] w-full grow",
-                            children: name
+                            className: "text-[.9rem] w-full h-4 grow relative overflow-hidden",
+                            children: /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
+                                className: "absolute inset-0",
+                                title: name,
+                                children: name
+                            }, void 0, false, {
+                                fileName: "src/image-picker/components/preview/preview.tsx",
+                                lineNumber: 101,
+                                columnNumber: 15
+                            }, undefined)
                         }, void 0, false, {
                             fileName: "src/image-picker/components/preview/preview.tsx",
-                            lineNumber: 98,
+                            lineNumber: 100,
                             columnNumber: 13
                         }, undefined),
                         /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)((0, $b2fed9bcf31ddc71$export$914e0b886a5281f8), {
@@ -419,13 +476,13 @@ const $1712531664cb6699$export$133773870222880f = (props)=>{
                             onClick: handleRemove
                         }, void 0, false, {
                             fileName: "src/image-picker/components/preview/preview.tsx",
-                            lineNumber: 100,
+                            lineNumber: 106,
                             columnNumber: 13
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/image-picker/components/preview/preview.tsx",
-                    lineNumber: 90,
+                    lineNumber: 92,
                     columnNumber: 11
                 }, undefined),
                 props.isUploading && /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
@@ -437,12 +494,12 @@ const $1712531664cb6699$export$133773870222880f = (props)=>{
                         showPercent: true
                     }, void 0, false, {
                         fileName: "src/image-picker/components/preview/preview.tsx",
-                        lineNumber: 108,
+                        lineNumber: 114,
                         columnNumber: 15
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/image-picker/components/preview/preview.tsx",
-                    lineNumber: 107,
+                    lineNumber: 113,
                     columnNumber: 13
                 }, undefined)
             ]
@@ -463,12 +520,12 @@ const $1712531664cb6699$export$133773870222880f = (props)=>{
             children: layout
         }, void 0, false, {
             fileName: "src/image-picker/components/preview/preview.tsx",
-            lineNumber: 136,
+            lineNumber: 142,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/image-picker/components/preview/preview.tsx",
-        lineNumber: 128,
+        lineNumber: 134,
         columnNumber: 5
     }, undefined);
 };
@@ -610,7 +667,9 @@ function $40ca87a7eda3004b$export$21c1139956c4884f(props) {
 }
 
 
+
 const $2deccf817de11e2a$export$183013bc7f2f4b5e = (props)=>{
+    const configs = (0, $8zHUo$react.useContext)((0, $4867e356d9e401b7$export$b1da5abff9d0406));
     const [loaded, setLoaded] = (0, $8zHUo$react.useState)(false);
     const onLoadHandler = ()=>{
         setLoaded(true);
@@ -632,7 +691,7 @@ const $2deccf817de11e2a$export$183013bc7f2f4b5e = (props)=>{
                 onClick: props.onClose
             }, void 0, false, {
                 fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
-                lineNumber: 23,
+                lineNumber: 25,
                 columnNumber: 7
             }, undefined),
             props.open && /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
@@ -645,24 +704,25 @@ const $2deccf817de11e2a$export$183013bc7f2f4b5e = (props)=>{
                         children: [
                             /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)((0, $40ca87a7eda3004b$export$21c1139956c4884f), {
                                 fontSize: 20,
-                                className: "text-typography"
+                                className: "text-typography",
+                                onClick: props.onClose
                             }, void 0, false, {
                                 fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
-                                lineNumber: 46,
+                                lineNumber: 48,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
                                 className: "text-typography text-[.8rem]",
-                                children: "\u0645\u0634\u0627\u0647\u062F\u0647 \u062A\u0635\u0648\u06CC\u0631"
+                                children: configs.locale.preview_image_modal_title
                             }, void 0, false, {
                                 fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
-                                lineNumber: 47,
+                                lineNumber: 53,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
-                        lineNumber: 45,
+                        lineNumber: 47,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("img", {
@@ -671,7 +731,7 @@ const $2deccf817de11e2a$export$183013bc7f2f4b5e = (props)=>{
                         onLoad: onLoadHandler
                     }, void 0, false, {
                         fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
-                        lineNumber: 49,
+                        lineNumber: 57,
                         columnNumber: 11
                     }, undefined),
                     !!props.name && /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
@@ -679,22 +739,23 @@ const $2deccf817de11e2a$export$183013bc7f2f4b5e = (props)=>{
                         children: props.name
                     }, void 0, false, {
                         fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
-                        lineNumber: 55,
+                        lineNumber: 63,
                         columnNumber: 13
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
-                lineNumber: 35,
+                lineNumber: 37,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
-        lineNumber: 16,
+        lineNumber: 18,
         columnNumber: 5
     }, undefined);
 };
+
 
 
 
@@ -704,17 +765,22 @@ const $f8622788abb4b096$var$ImagePicker = ()=>{
     const [uploadingFiles, setUploadingFiles] = (0, $8zHUo$react.useState)({});
     const [previewModal, setPreviewModal] = (0, $8zHUo$react.useState)();
     const [uploadedFiles, setUploadedFiles] = (0, $8zHUo$react.useState)([]);
-    const selectedSum = (0, $8zHUo$react.useMemo)(()=>configs.files.length + ~~configs.images?.length, [
-        configs.files,
-        configs.images
-    ]);
     (0, $8zHUo$react.useEffect)(()=>{
         configs.onChange?.(configs.files);
     }, [
         configs.files,
         configs.onChange
     ]);
-    const isLimitReached = (!!configs.files.length || !!configs.images?.length) && !configs.multiple && typeof configs.limit == "undefined" || typeof configs.limit == "number" && (configs.files.length >= configs.limit || (configs.images?.length || 0) >= configs.limit);
+    const selectedSum = (0, $8zHUo$react.useMemo)(()=>(0, $9ba0f9a5c47c04f2$export$63b087218d043c45)(configs), [
+        configs.files,
+        configs.images
+    ]);
+    const isLimitReached = (0, $8zHUo$react.useMemo)(()=>(0, $9ba0f9a5c47c04f2$export$34bc97de79737939)(configs), [
+        configs.files,
+        configs.images,
+        configs.multiple,
+        configs.limit
+    ]);
     const isUploading = (0, $8zHUo$react.useCallback)((fileID)=>{
         const progress = uploadingFiles[fileID];
         if (typeof progress == "undefined") return false;
@@ -768,7 +834,7 @@ const $f8622788abb4b096$var$ImagePicker = ()=>{
                 onShowInModal: (url)=>setPreviewModal(url)
             }, (0, $9ba0f9a5c47c04f2$export$a0781c1cbbc5fc36)(file), false, {
                 fileName: "src/image-picker/image-picker.tsx",
-                lineNumber: 91,
+                lineNumber: 89,
                 columnNumber: 7
             }, undefined));
         const imageItems = configs.images?.map((image, idx)=>/*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)((0, $1712531664cb6699$export$133773870222880f), {
@@ -778,7 +844,7 @@ const $f8622788abb4b096$var$ImagePicker = ()=>{
                 onShowInModal: (url)=>setPreviewModal(url)
             }, `image_${idx}`, false, {
                 fileName: "src/image-picker/image-picker.tsx",
-                lineNumber: 105,
+                lineNumber: 103,
                 columnNumber: 9
             }, undefined)) || [];
         const items = fileItems.concat(imageItems);
@@ -787,7 +853,7 @@ const $f8622788abb4b096$var$ImagePicker = ()=>{
             children: items
         }, void 0, false, {
             fileName: "src/image-picker/image-picker.tsx",
-            lineNumber: 116,
+            lineNumber: 114,
             columnNumber: 12
         }, undefined);
     }, [
@@ -797,19 +863,31 @@ const $f8622788abb4b096$var$ImagePicker = ()=>{
         uploadedFiles
     ]);
     const uploadInterface = (0, $8zHUo$react.useMemo)(()=>{
-        if (!isLimitReached && configs.dragabble) return /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)((0, $839c8cc5f1d64e5c$export$b4a441ca74fcf9d2), {
-            onDrop: handleDropFiles
-        }, selectedSum, false, {
-            fileName: "src/image-picker/image-picker.tsx",
-            lineNumber: 121,
-            columnNumber: 14
-        }, undefined);
+        if (!isLimitReached) {
+            if (configs.dragabble) return /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)((0, $839c8cc5f1d64e5c$export$b4a441ca74fcf9d2), {
+                onDrop: handleDropFiles
+            }, selectedSum, false, {
+                fileName: "src/image-picker/image-picker.tsx",
+                lineNumber: 120,
+                columnNumber: 16
+            }, undefined);
+            else return /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)((0, $570ac3403482c4dc$export$b3f7d4725397d87e), {
+                onChange: handleDropFiles
+            }, selectedSum, false, {
+                fileName: "src/image-picker/image-picker.tsx",
+                lineNumber: 122,
+                columnNumber: 16
+            }, undefined);
+        }
     }, [
-        configs.files.length,
-        configs.images?.length
+        selectedSum,
+        isLimitReached
     ]);
     return /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
         className: "flex flex-col gap-5",
+        style: {
+            direction: configs.rtl ? "rtl" : "ltr"
+        },
         children: [
             uploadInterface,
             configs.showPreview && previewSection,
@@ -819,13 +897,13 @@ const $f8622788abb4b096$var$ImagePicker = ()=>{
                 onClose: ()=>setPreviewModal(undefined)
             }, void 0, false, {
                 fileName: "src/image-picker/image-picker.tsx",
-                lineNumber: 129,
+                lineNumber: 135,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/image-picker/image-picker.tsx",
-        lineNumber: 126,
+        lineNumber: 127,
         columnNumber: 5
     }, undefined);
 };
@@ -833,12 +911,12 @@ const $f8622788abb4b096$var$WithProvider = (props)=>/*#__PURE__*/ (0, $8zHUo$rea
         ...props,
         children: /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)($f8622788abb4b096$var$ImagePicker, {}, void 0, false, {
             fileName: "src/image-picker/image-picker.tsx",
-            lineNumber: 140,
+            lineNumber: 146,
             columnNumber: 5
         }, undefined)
     }, void 0, false, {
         fileName: "src/image-picker/image-picker.tsx",
-        lineNumber: 139,
+        lineNumber: 145,
         columnNumber: 3
     }, undefined);
 var $f8622788abb4b096$export$2e2bcd8739ae039 = $f8622788abb4b096$var$WithProvider;
