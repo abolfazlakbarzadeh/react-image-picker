@@ -398,7 +398,7 @@ const $1712531664cb6699$export$133773870222880f = (props)=>{
                                 className: "flex items-center text-white",
                                 children: [
                                     /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
-                                        className: "text-[.9rem] w-full grow relative",
+                                        className: "text-[.9rem] h-[1rem] w-full grow relative",
                                         children: /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
                                             className: "absolute inset-0",
                                             children: name
@@ -702,21 +702,21 @@ const $2deccf817de11e2a$export$183013bc7f2f4b5e = (props)=>{
                     /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
                         className: "flex items-center justify-between",
                         children: [
-                            /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)((0, $40ca87a7eda3004b$export$21c1139956c4884f), {
-                                fontSize: 20,
-                                className: "text-typography",
-                                onClick: props.onClose
-                            }, void 0, false, {
-                                fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
-                                lineNumber: 48,
-                                columnNumber: 13
-                            }, undefined),
                             /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)("div", {
                                 className: "text-typography text-[.8rem]",
                                 children: configs.locale.preview_image_modal_title
                             }, void 0, false, {
                                 fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
-                                lineNumber: 53,
+                                lineNumber: 48,
+                                columnNumber: 13
+                            }, undefined),
+                            /*#__PURE__*/ (0, $8zHUo$reactjsxdevruntime.jsxDEV)((0, $40ca87a7eda3004b$export$21c1139956c4884f), {
+                                fontSize: 20,
+                                className: "text-typography cursor-pointer",
+                                onClick: props.onClose
+                            }, void 0, false, {
+                                fileName: "src/image-picker/components/preview-modal/preview-modal.tsx",
+                                lineNumber: 51,
                                 columnNumber: 13
                             }, undefined)
                         ]

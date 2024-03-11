@@ -72,7 +72,7 @@ export const Preview: IPreview = (props) => {
                 )}
               </div>
               <div className="flex items-center text-white">
-                <div className="text-[.9rem] w-full grow relative">
+                <div className="text-[.9rem] h-[1rem] w-full grow relative">
                   <div className="absolute inset-0">{name}</div>
                 </div>
 

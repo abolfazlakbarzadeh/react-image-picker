@@ -45,14 +45,14 @@ export const PreviewModal: IPreviewModal = (props) => {
           )}
         >
           <div className="flex items-center justify-between">
-            <CarbonCloseOutline
-              fontSize={20}
-              className="text-typography"
-              onClick={props.onClose}
-            />
             <div className="text-typography text-[.8rem]">
               {configs.locale.preview_image_modal_title}
             </div>
+            <CarbonCloseOutline
+              fontSize={20}
+              className="text-typography cursor-pointer"
+              onClick={props.onClose}
+            />
           </div>
           <img
             src={props.url}

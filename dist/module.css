@@ -311,6 +311,10 @@ img, video {
   height: 100%;
 }
 
+.h-\[1rem\] {
+  height: 1rem;
+}
+
 .max-h-\[90\%\] {
   max-height: 90%;
 }
