@@ -299,10 +299,6 @@ img, video {
   height: 10rem;
 }
 
-.h-\[1rem\] {
-  height: 1rem;
-}
-
 .h-\[5px\] {
   height: 5px;
 }
@@ -313,6 +309,10 @@ img, video {
 
 .h-full {
   height: 100%;
+}
+
+.h-\[1rem\] {
+  height: 1rem;
 }
 
 .max-h-\[90\%\] {

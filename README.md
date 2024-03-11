@@ -1,7 +1,7 @@
 
 # React Image Picker
 
-[![Version](https://img.shields.io/badge/Version-1.1.1-green?style=flat)](https://choosealicense.com/licenses/mit/)
+[![Version](https://img.shields.io/badge/Version-1.1.2-green?style=flat)](https://choosealicense.com/licenses/mit/)
 
 
 A handy image picker for you all for your React.js/Next.js projects :)
@@ -28,12 +28,13 @@ const Component = () => {
     <ImagePicker
         files={selectedFiles}
         onFilesChange={setSelectedFiles}
+        onChange={(files) => {}} //optional
     />
   )
 }
 ```
 
-To use image picker in with Drag and Drop:
+To use image picker with Drag and Drop:
 ```js
 const Component = () => {
   const [selectedFiles, setSelectedFiles] = useState[]);
