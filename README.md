@@ -44,7 +44,7 @@ npm install --save @abak/react-image-picker
 To use image picker in simplest approach:
 ```js
 const Component = () => {
-  const [selectedFiles, setSelectedFiles] = useState[]);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   return (
     <ImagePicker
@@ -59,7 +59,7 @@ const Component = () => {
 To use image picker with Drag and Drop:
 ```js
 const Component = () => {
-  const [selectedFiles, setSelectedFiles] = useState[]);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   return (
     <ImagePicker
@@ -74,7 +74,7 @@ const Component = () => {
 If you wanna show images those already exist:
 ```js
 const Component = () => {
-  const [selectedFiles, setSelectedFiles] = useState[]);
+  const [selectedFiles, setSelectedFiles] = useState([]);
   const [images, setImages] = useState([]);
 
   return (
@@ -103,9 +103,9 @@ etc...
 | `uploadAction`| `string` | The URL of the action that auto upload uses to upload the image, **Required IF** the uploadOnSelect is set.|
 | `uploadAxiosOptions`| `AxiosRequestConfig` | The axios configs that uploader will uses for axios uploader.|
 | `uploadHandler`| `IUploadHandler` | Custom handler to perform uploading.|
-| `images`| `IImagePickerImage[]` | List of image object that have `id`, `path` and `name`(optional).|
+| `images`| `IImagePickerImage([]` | List of image object that have `id`, `path` and `name`(optional).|
 | `onRemoveImage`| `(image: IImagePickerImage) => void` | When an image of `images` is removed, this func will be called.|
-| `onChange`| `(files: File[]) => void` | This func will be called when a new image is selected.|
+| `onChange`| `(files: File([]) => void` | This func will be called when a new image is selected.|
 
 #### `IUploadHandler`
 ```ts
