@@ -1,13 +1,36 @@
 
 # React Image Picker
 
-[![Version](https://img.shields.io/badge/Version-1.1.2-green?style=flat)](https://choosealicense.com/licenses/mit/)
+[![Version](https://img.shields.io/badge/Version-1.1.3-green?style=flat)](https://choosealicense.com/licenses/mit/)
 
 
 A handy image picker for you all for your React.js/Next.js projects :)
 
 
-#
+##
+
+<div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center;">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<img src="https://github.com/abolfazlakbarzadeh/react-image-picker/blob/main/src/images/image-1.png?raw=true" width="150">
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<img src="https://github.com/abolfazlakbarzadeh/react-image-picker/blob/main/src/images/image-2.png?raw=true" width="150">
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<img src="https://github.com/abolfazlakbarzadeh/react-image-picker/blob/main/src/images/image-3.png?raw=true" width="150">
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<img src="https://github.com/abolfazlakbarzadeh/react-image-picker/blob/main/src/images/image-4.png?raw=true" width="150">
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<img src="https://github.com/abolfazlakbarzadeh/react-image-picker/blob/main/src/images/image-5.png?raw=true" width="150">
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<img src="https://github.com/abolfazlakbarzadeh/react-image-picker/blob/main/src/images/image-6.png?raw=true" width="150">
+</div>
+
+</div>
+
 ## Documentation
 
 ### Install
