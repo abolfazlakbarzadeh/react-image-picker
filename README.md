@@ -1,11 +1,10 @@
 
 # React Image Picker
 
-[![Version](https://img.shields.io/badge/Version-1.1.3-green?style=flat)](https://choosealicense.com/licenses/mit/)
+[![Version](https://img.shields.io/badge/Version-1.1.4-green?style=flat)](https://choosealicense.com/licenses/mit/)
 
 
-A handy image picker for you all for your React.js/Next.js projects :)
-
+A useful image picker for your react.js/next.js projects :)
 
 ##
 
